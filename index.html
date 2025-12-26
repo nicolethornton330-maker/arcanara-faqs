@@ -1,1 +1,471 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Arcanara FAQ</title>
+  <meta name="description" content="Arcanara FAQ: commands, card meanings, images, ephemeral responses, opt-in history, troubleshooting, and support." />
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#101a33;
+      --panel2:#0f1830;
+      --text:#e9ecf5;
+      --muted:#b8c0d9;
+      --border:rgba(255,255,255,.10);
+      --accent:#8c52ff;
+      --accent2:#35d0ba;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 10% 0%, rgba(140,82,255,.25), transparent 60%),
+                  radial-gradient(1000px 500px at 90% 20%, rgba(53,208,186,.18), transparent 55%),
+                  var(--bg);
+      line-height:1.45;
+    }
+    a{color:inherit}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 18px 60px}
+    header{
+      padding:22px 18px;
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .topline{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:44px;height:44px;border-radius:14px;
+      background: radial-gradient(circle at 30% 30%, rgba(140,82,255,.95), rgba(140,82,255,.25)),
+                  radial-gradient(circle at 70% 70%, rgba(53,208,186,.75), rgba(53,208,186,.10));
+      border:1px solid var(--border);
+      box-shadow: 0 12px 30px rgba(140,82,255,.12);
+      flex:0 0 auto;
+    }
+    h1{margin:0;font-size:1.55rem;letter-spacing:.2px}
+    .sub{margin:6px 0 0;color:var(--muted);max-width:75ch}
+    .pillbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .pill{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:8px 10px;border-radius:999px;
+      font-size:.92rem;color:var(--muted)
+    }
+    .pill code{font-family:var(--mono);font-size:.92em;color:var(--text)}
+    .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 12px;border-radius:12px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.05);
+      text-decoration:none;
+      transition: transform .08s ease, background .15s ease, border-color .15s ease;
+      color:var(--text);
+    }
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18)}
+    .btn strong{font-weight:650}
+    .btn small{color:var(--muted)}
+    .grid{margin-top:18px;display:grid;gap:14px;grid-template-columns: 1fr;}
+    .card{
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .cardhead{
+      padding:14px 16px;
+      border-bottom:1px solid var(--border);
+      display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+      background:rgba(0,0,0,.12);
+    }
+    .search{display:flex;gap:10px;align-items:center;flex:1 1 420px;}
+    .search input{
+      width:100%;
+      padding:11px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.14);
+      outline:none;
+      background:rgba(0,0,0,.28);
+      color:var(--text);
+    }
+    .search input::placeholder{color:rgba(233,236,245,.55)}
+    .count{color:var(--muted);font-size:.95rem;white-space:nowrap;}
+    .sections{padding:8px}
+    details{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+      border-radius:14px;
+      margin:10px 8px;
+      overflow:hidden;
+    }
+    details[open]{background:rgba(255,255,255,.045)}
+    summary{
+      cursor:pointer;
+      padding:14px 14px;
+      list-style:none;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      user-select:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    .q{font-weight:650;letter-spacing:.1px;}
+    .tag{
+      font-size:.82rem;
+      padding:5px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      background:rgba(0,0,0,.18);
+      flex:0 0 auto;
+    }
+    .a{padding:0 14px 14px 14px;color:var(--muted);}
+    .a p{margin:10px 0 0}
+    .a code{
+      font-family:var(--mono);
+      font-size:.95em;
+      color:var(--text);
+      background:rgba(0,0,0,.28);
+      border:1px solid rgba(255,255,255,.12);
+      padding:2px 6px;border-radius:8px;
+    }
+    .a ul{margin:10px 0 0 18px}
+    footer{
+      margin-top:18px;
+      color:rgba(233,236,245,.55);
+      font-size:.92rem;
+      text-align:center;
+    }
+    .fineprint{margin-top:10px}
+  </style>
+</head>
 
+<body>
+  <div class="wrap">
+    <header>
+      <div class="topline">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <h1>Arcanara FAQ</h1>
+            <div class="sub">
+              Commands, card meanings, images, ephemeral responses, opt-in history, troubleshooting, and support.
+              Tarot is a mirror, not a mandate.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillbar">
+        <div class="pill">Support response: <strong>≤ 24 hours</strong></div>
+        <div class="pill">Best for: <strong>card meanings</strong>, <strong>daily pulls</strong>, <strong>guided reflection</strong></div>
+        <div class="pill">Try: <code>/meaning</code> • <code>/cardoftheday</code></div>
+      </div>
+
+      <div class="cta">
+        <!-- Replace these with your real links -->
+        <a class="btn" href="#" target="_blank" rel="noreferrer">
+          <div>
+            <strong>Join Support Server</strong><br/>
+            <small>Help • Suggestions • Bug reports</small>
+          </div>
+        </a>
+        <a class="btn" href="#" target="_blank" rel="noreferrer">
+          <div>
+            <strong>Invite Arcanara</strong><br/>
+            <small>Add to your server</small>
+          </div>
+        </a>
+        <a class="btn" href="#" target="_blank" rel="noreferrer">
+          <div>
+            <strong>Top.gg Listing</strong><br/>
+            <small>Reviews • Updates • Info</small>
+          </div>
+        </a>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="card" style="margin-top:16px">
+        <div class="cardhead">
+          <div class="search">
+            <input id="search" type="search" placeholder="Search FAQs (example: /meaning, images, ephemeral, history, privacy, permissions)…" />
+          </div>
+          <div class="count"><span id="matchCount">0</span> shown</div>
+        </div>
+
+        <div class="sections" id="faqRoot">
+
+          <!-- Getting Started -->
+          <details data-tags="getting started basics tarot what is arcanara">
+            <summary>
+              <span class="q">What is Arcanara?</span>
+              <span class="tag">Getting Started</span>
+            </summary>
+            <div class="a">
+              <p>
+                Arcanara is a tarot-focused Discord bot built for fast, readable card meanings and guided self-reflection.
+                It supports slash commands for pulls and interpretations, and can include card images when permissions allow.
+              </p>
+              <p>
+                Arcanara isn’t here to “tell your future.” It’s designed to help you think clearly, notice patterns, and explore options.
+              </p>
+            </div>
+          </details>
+
+          <details data-tags="getting started commands help slash commands">
+            <summary>
+              <span class="q">How do I see what commands are available?</span>
+              <span class="tag">Getting Started</span>
+            </summary>
+            <div class="a">
+              <p>
+                Use Discord’s slash-command menu (type <code>/</code>) and look for Arcanara’s command list.
+                Most users start with <code>/meaning</code> for specific cards and <code>/cardoftheday</code> for a daily pull.
+              </p>
+            </div>
+          </details>
+
+          <!-- Commands -->
+          <details data-tags="meaning command /meaning card name image card photo upright reversed">
+            <summary>
+              <span class="q">How does /meaning work?</span>
+              <span class="tag">Commands</span>
+            </summary>
+            <div class="a">
+              <p>
+                <code>/meaning</code> returns upright and reversed meanings for a requested card. If image permissions are enabled,
+                Arcanara may include the card image attachment alongside the text.
+              </p>
+              <p>
+                Tip: you can usually type partial card names and choose from Discord’s suggestions if autocomplete is enabled.
+              </p>
+            </div>
+          </details>
+
+          <details data-tags="card of the day /cardoftheday daily card daily pull duplicate same card">
+            <summary>
+              <span class="q">How does /cardoftheday work?</span>
+              <span class="tag">Commands</span>
+            </summary>
+            <div class="a">
+              <p>
+                <code>/cardoftheday</code> gives you a daily card pull intended to guide reflection for the day.
+                It’s designed to be stable for that day (so you’re not “rerolling reality” every five minutes).
+              </p>
+              <p>
+                If your deck data changes in the background (e.g., card naming updates), Arcanara may fall back gracefully and re-draw to avoid errors.
+              </p>
+            </div>
+          </details>
+
+          <!-- Ephemeral -->
+          <details data-tags="ephemeral responses private visible to me embeds messages">
+            <summary>
+              <span class="q">Are Arcanara responses always ephemeral? Are they always embeds?</span>
+              <span class="tag">Behavior</span>
+            </summary>
+            <div class="a">
+              <p>
+                Ephemeral means “only you can see it” in Discord. Ephemeral responses can be plain text, embeds, or a mix —
+                it depends on the command and what it’s returning.
+              </p>
+              <p>
+                Some commands may respond publicly by design (for shared readings or server features). If you’re unsure,
+                check the command description or ask in the support server.
+              </p>
+            </div>
+          </details>
+
+          <!-- Images & Permissions -->
+          <details data-tags="images not showing attach files embed links permissions">
+            <summary>
+              <span class="q">Why can’t I see card images?</span>
+              <span class="tag">Images</span>
+            </summary>
+            <div class="a">
+              <p>
+                Card images require the bot to have <strong>Attach Files</strong> in that channel.
+                If Arcanara uses embeds for rich formatting, <strong>Embed Links</strong> may also be needed.
+              </p>
+              <p>
+                Fix: check channel permission overrides for the bot role, and confirm “Attach Files” is allowed where you’re using the commands.
+              </p>
+            </div>
+          </details>
+
+          <details data-tags="permissions view channel send messages read message history attach files embed links">
+            <summary>
+              <span class="q">Which permissions does Arcanara need?</span>
+              <span class="tag">Permissions</span>
+            </summary>
+            <div class="a">
+              <p>For the channel where you use Arcanara, these are the usual requirements:</p>
+              <ul>
+                <li><strong>View Channel</strong></li>
+                <li><strong>Send Messages</strong></li>
+                <li><strong>Read Message History</strong> (helps with interaction updates and context)</li>
+                <li><strong>Embed Links</strong> (if embeds are used)</li>
+                <li><strong>Attach Files</strong> (for card images)</li>
+              </ul>
+              <p>
+                If commands respond but output is missing (especially images), it’s almost always a channel override issue.
+              </p>
+            </div>
+          </details>
+
+          <!-- History / Logging -->
+          <details data-tags="history opt in opt-in logging privacy settings data">
+            <summary>
+              <span class="q">Does Arcanara store my reading history?</span>
+              <span class="tag">Privacy</span>
+            </summary>
+            <div class="a">
+              <p>
+                Arcanara supports <strong>opt-in</strong> history for certain features (for example, tracking daily cards or lookups).
+                If you haven’t opted in, history-related logging is intended to remain disabled.
+              </p>
+              <p>
+                If you want to enable or disable history tracking, use the bot’s relevant settings command (or ask in the support server for the current command name).
+              </p>
+            </div>
+          </details>
+
+          <details data-tags="what data stored user id settings server id minimal">
+            <summary>
+              <span class="q">What data does Arcanara store?</span>
+              <span class="tag">Privacy</span>
+            </summary>
+            <div class="a">
+              <p>
+                Arcanara stores the minimum configuration required to function (like server-level settings, if enabled) and
+                any user-specific settings you choose to save (such as preferences/tone).
+              </p>
+              <p>
+                Any history-style tracking is intended to be <strong>opt-in</strong>. If you need a formal privacy policy for Top.gg,
+                request the current policy text in the support server.
+              </p>
+            </div>
+          </details>
+
+          <!-- Interpretation / Guidance -->
+          <details data-tags="tarot advice medical legal financial disclaimer">
+            <summary>
+              <span class="q">Is Arcanara “advice”? How should I use readings responsibly?</span>
+              <span class="tag">Guidance</span>
+            </summary>
+            <div class="a">
+              <p>
+                Use Arcanara for reflection and decision support, not as a substitute for professional guidance.
+                Tarot can be meaningful, but it’s not a license to ignore medical, legal, or financial reality.
+              </p>
+              <p>
+                A practical approach: treat readings as prompts — “What am I not noticing?” “What tradeoff am I avoiding?” —
+                then make grounded choices with real-world information.
+              </p>
+            </div>
+          </details>
+
+          <!-- Troubleshooting -->
+          <details data-tags="not responding interaction failed discord outage permissions rate limit">
+            <summary>
+              <span class="q">The command says “Interaction Failed” or Arcanara doesn’t respond. Why?</span>
+              <span class="tag">Troubleshooting</span>
+            </summary>
+            <div class="a">
+              <p>
+                Common causes:
+              </p>
+              <ul>
+                <li>Missing channel permissions (Send Messages / Embed Links / Attach Files)</li>
+                <li>Discord API hiccups (it happens)</li>
+                <li>Command timing out due to heavy load or a transient error</li>
+              </ul>
+              <p>
+                If it’s persistent, capture a screenshot and share it in the support server along with the command you ran and the channel name.
+              </p>
+            </div>
+          </details>
+
+          <details data-tags="card not found name mismatch deck json">
+            <summary>
+              <span class="q">“I searched the deck but found no card named …” What should I do?</span>
+              <span class="tag">Troubleshooting</span>
+            </summary>
+            <div class="a">
+              <p>
+                That means Arcanara couldn’t match the card name you entered to the deck’s canonical card list.
+                Try a shorter partial name (e.g., “lovers”, “high priestess”), or select from the autocomplete list if it appears.
+              </p>
+              <p>
+                If a commonly-used card name isn’t matching, report it — that’s usually a normalization/mapping fix.
+              </p>
+            </div>
+          </details>
+
+          <!-- Support -->
+          <details data-tags="support bug report feature request suggestions response time">
+            <summary>
+              <span class="q">How do I report a bug or request a feature?</span>
+              <span class="tag">Support</span>
+            </summary>
+            <div class="a">
+              <p>
+                Use the support server and post in the appropriate channel (support / bugs / suggestions).
+                For bugs, include what you ran, what you expected, and what happened — screenshots or logs are gold.
+              </p>
+              <p>
+                Support inquiries receive a response within <strong>24 hours or less</strong>.
+              </p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="fineprint">
+        © <span id="year"></span> Arcanara • Built with equal parts structure and starlight.
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+    const search = $("#search");
+    const details = $$("#faqRoot details");
+    const matchCount = $("#matchCount");
+
+    function normalize(s){ return (s || "").toLowerCase().trim(); }
+
+    function update(){
+      const q = normalize(search.value);
+      let shown = 0;
+
+      details.forEach(d => {
+        const text = normalize(d.innerText);
+        const tags = normalize(d.getAttribute("data-tags"));
+        const hit = !q || text.includes(q) || tags.includes(q);
+        d.style.display = hit ? "" : "none";
+        if(hit) shown++;
+        if(!hit) d.removeAttribute("open");
+      });
+
+      matchCount.textContent = shown;
+    }
+
+    search.addEventListener("input", update);
+    $("#year").textContent = new Date().getFullYear();
+    update();
+  </script>
+</body>
+</html>
